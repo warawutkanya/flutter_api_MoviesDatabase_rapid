@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controllers/movie_controller.dart'; // Import the MovieController
 import '../services/movie_service.dart'; // Import the MovieService
+import '../routes/app_routes.dart'; // Import the app routes
+import '../models/movie.dart'; // Import the Movie model
 
 class HomeView extends StatelessWidget {
-  // Initialize MovieController with the MovieService
   final MovieController movieController =
       Get.put(MovieController(movieService: MovieService()));
 
@@ -40,6 +41,10 @@ class HomeView extends StatelessWidget {
                       child: Icon(Icons.movie),
                     ),
               title: Text(movie.title),
+              onTap: () {
+                // Navigate to MovieDetailView and pass the selected movie
+                Get.toNamed(AppRoutes.MOVIE_DETAIL, arguments: movie.toJson());
+              },
             );
           },
         );
